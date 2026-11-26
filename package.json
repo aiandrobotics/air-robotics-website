@@ -1,0 +1,21 @@
+{
+  "name": "air-robotics-website",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @air-robotics/site dev",
+    "build": "pnpm --filter @air-robotics/site build",
+    "preview": "pnpm --filter @air-robotics/site preview",
+    "check": "pnpm --filter @air-robotics/site check && pnpm --filter @air-robotics/docs-theme check",
+    "lint": "biome check .",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "typescript": "^5.8.2"
+  }
+}
