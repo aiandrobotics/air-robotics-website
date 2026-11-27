@@ -1,6 +1,10 @@
 # ------------------------------------------------------------------------------
 # Least-Privilege GitHub Actions OIDC Roles (Deploy + PR Plan)
 # ------------------------------------------------------------------------------
+locals {
+  github_sub_prefix = coalesce(var.github_oidc_sub_prefix, "repo:${var.github_repo}")
+}
+
 data "aws_iam_policy_document" "github_oidc_assume_deploy" {
   statement {
     sid     = "AllowGitHubActionsDeployOIDC"
@@ -22,8 +26,8 @@ data "aws_iam_policy_document" "github_oidc_assume_deploy" {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
       values = [
-        "repo:${var.github_repo}:environment:${var.environment}",
-        "repo:${var.github_repo}:ref:refs/heads/${var.github_branch}",
+        "${local.github_sub_prefix}:environment:${var.environment}",
+        "${local.github_sub_prefix}:ref:refs/heads/${var.github_branch}",
       ]
     }
   }
@@ -180,8 +184,8 @@ data "aws_iam_policy_document" "github_oidc_assume_plan" {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
       values = [
-        "repo:${var.github_repo}:pull_request",
-        "repo:${var.github_repo}:environment:${var.environment}",
+        "${local.github_sub_prefix}:pull_request",
+        "${local.github_sub_prefix}:environment:${var.environment}",
       ]
     }
   }

@@ -42,6 +42,12 @@ variable "github_repo" {
   default     = "aiandrobotics/air-robotics-website"
 }
 
+variable "github_oidc_sub_prefix" {
+  description = "GitHub OIDC subject prefix (supports GitHub immutable subject IDs, e.g. repo:org@id/repo@id). Defaults to repo:<github_repo> when null."
+  type        = string
+  default     = null
+}
+
 variable "github_branch" {
   description = "GitHub branch authorized to assume this environment's deploy role."
   type        = string
