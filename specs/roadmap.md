@@ -59,7 +59,7 @@ Each phase below is designed to be specified and implemented incrementally using
   - Complete skill instructions covering tech stack (Astro + Starlight + shared Air Robotics theme), directory layout, frontmatter/asset conventions, local standalone preview/build commands, CI validation + `repository_dispatch`, and manifest registration in `air-robotics-website`.
 
 ## Phase 7: Fabrica Standalone Robot Docs & End-to-End Integration
-- **Status**: `[ ]` Not started
+- **Status**: `[x]` Complete
 - **Goal**: Switch to the **Fabrica** robot repository, use the shared theme package and `air-robot-docs` agent skill to bootstrap and build Fabrica's standalone docs, and connect Fabrica to `air-robotics-website` to prove the full workflow end to end.
 - **Key Deliverables**:
   - Switch to the **Fabrica** robot repository and use the `air-robot-docs` skill + shared Air Robotics theme to bootstrap and build Fabrica's standalone documentation.

@@ -1,17 +1,17 @@
 robots:
   - slug: fabrica
     name: Fabrica
-    status: Coming Soon
-    tagline: Open-source robotic automation platform built for makers and engineers.
+    status: Active
+    tagline: Smart open-source cloth folding robot built for $80–$150.
     summary: >-
-      Our first open-source robot project—complete with step-by-step assembly guides,
-      3D printable parts, electronics schematics, and firmware documentation.
+      Automated garment folding robot using modular 3D-printed hinged panels,
+      ESP32-S3 FreeRTOS firmware, PCA9685 servo actuation, and BLE mobile control.
     repo: https://github.com/aiandrobotics/fabrica
     ref: main
     docsPath: docs/src/content/docs
     assetsPath: docs/public
-    syncEnabled: false
+    syncEnabled: true
     highlights:
-      - 3D printable mechanical design
-      - Open-source firmware & control software
-      - Complete electronics schematics & BOM
+      - 8–12 second folding cycle with parallel servo sweeps
+      - Parametric FreeCAD 3D-printable modular chassis
+      - ESP-IDF v6.0.2 dual-core firmware (880/880 tests passing) & BLE app control
