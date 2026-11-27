@@ -14,7 +14,7 @@ Each phase below is designed to be specified and implemented incrementally using
   - Verified local dev server and static production build (`dist/`).
 
 ## Phase 2: AWS Infrastructure with Terraform
-- **Status**: `[ ]` Not started
+- **Status**: `[x]` Complete
 - **Goal**: Provision reproducible AWS hosting and deployment roles for both `dev` (`dev.air-robotics.ai`) and `prod` (`air-robotics.ai`).
 - **Key Deliverables**:
   - Remote Terraform state bootstrap configuration (S3 backend with locking).
