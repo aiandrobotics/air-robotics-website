@@ -33,7 +33,7 @@ Each phase below is designed to be specified and implemented incrementally using
   - End-to-end verification of the minimal home page live at `dev.air-robotics.ai` and promoted to `air-robotics.ai`.
 
 ## Phase 4: Shared Theme & Full Main Website
-- **Status**: `[ ]` Not started
+- **Status**: `[x]` Complete
 - **Goal**: Build the shared Air Robotics theme package and the full v1 main website pages with a clean, consistent look and feel.
 - **Key Deliverables**:
   - Shared Air Robotics theme package (design tokens, clean typography, light/dark styling, header/footer, Starlight preset) consumable by both the main website and standalone robot repos.
