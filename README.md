@@ -6,7 +6,8 @@ Main website and unified documentation hub for **Air Robotics** ([air-robotics.a
 
 - `site/` — Main Astro + Starlight website (`@air-robotics/site`)
 - `packages/theme/` — Shared Air Robotics theme package (`@air-robotics/docs-theme`)
-- `infra/` — AWS Terraform infrastructure (Phase 2)
+- `infra/` — AWS Terraform infrastructure ([infra/README.md](infra/README.md))
+- `.github/` — GitHub Actions CI/CD workflows ([.github/README.md](.github/README.md))
 - `scripts/` — Build-time multi-repo docs aggregation scripts (Phase 5)
 - `specs/` — Project constitution (`mission.md`, `tech-stack.md`, `roadmap.md`) and dated feature specs
 

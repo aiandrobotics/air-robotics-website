@@ -29,6 +29,11 @@ output "site_url" {
 }
 
 output "github_deploy_role_arn" {
-  description = "IAM role ARN assumed by GitHub Actions via OIDC for this environment."
+  description = "IAM role ARN assumed by GitHub Actions via OIDC for deploys and Terraform apply."
   value       = aws_iam_role.github_deploy.arn
+}
+
+output "github_plan_role_arn" {
+  description = "Read-only IAM role ARN assumed by GitHub Actions via OIDC for PR Terraform plans."
+  value       = aws_iam_role.github_plan.arn
 }

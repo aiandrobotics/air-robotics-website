@@ -23,7 +23,7 @@ Each phase below is designed to be specified and implemented incrementally using
   - GitHub Actions OIDC provider and least-privilege IAM roles scoped to `dev` and `prod` deployments.
 
 ## Phase 3: CI/CD & Dev-to-Prod Promotion Pipeline (GitHub Actions + Terraform)
-- **Status**: `[ ]` Not started
+- **Status**: `[x]` Complete
 - **Goal**: Automate validation, Terraform plan/apply, `dev` deployment, and `dev` → `main` promotion to `prod` using GitHub Actions, and verify the minimal home page end to end on both environments.
 - **Key Deliverables**:
   - PR validation workflow in GitHub Actions (lint, typecheck, site build, and `terraform fmt` / `validate` / `plan` against the target environment).

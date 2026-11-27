@@ -1,0 +1,100 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+    inputs:
+      apply_infra:
+        description: 'Run terraform apply for dev infrastructure before deploying site'
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: false
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to dev.air-robotics.ai
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: https://dev.air-robotics.ai
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint, check, and build site
+        run: pnpm lint && pnpm check && pnpm build
+
+      - name: Detect infrastructure changes
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.apply_infra }}" = "true" ]; then
+            echo "apply_infra=true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ] && \
+               git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- infra/ | grep -q .; then
+            echo "apply_infra=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "apply_infra=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Setup Terraform
+        if: steps.changes.outputs.apply_infra == 'true'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.11.4'
+
+      - name: Apply dev Terraform infrastructure
+        if: steps.changes.outputs.apply_infra == 'true'
+        run: |
+          terraform -chdir=infra/environments/dev init -input=false \
+            -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+          terraform -chdir=infra/environments/dev apply -auto-approve -input=false -no-color \
+            -var="bucket_name=${{ vars.S3_BUCKET }}" \
+            -var="github_oidc_provider_arn=${{ vars.OIDC_PROVIDER_ARN }}" \
+            -var="state_bucket_arn=${{ vars.TF_STATE_BUCKET_ARN }}"
+
+      - name: Sync hashed assets to dev S3 bucket
+        run: |
+          if [ -d site/dist/_astro ]; then
+            aws s3 sync site/dist/_astro "s3://${{ vars.S3_BUCKET }}/_astro" \
+              --delete \
+              --cache-control "public, max-age=31536000, immutable"
+          fi
+
+      - name: Sync site files to dev S3 bucket
+        run: |
+          aws s3 sync site/dist "s3://${{ vars.S3_BUCKET }}" \
+            --delete \
+            --exclude "_astro/*" \
+            --cache-control "public, max-age=0, must-revalidate"
+
+      - name: Invalidate dev CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*"
