@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["dist", ".astro", "node_modules", "pnpm-lock.yaml"]
+    "ignore": ["dist", ".astro", "node_modules", "pnpm-lock.yaml", "site/src/generated"]
   },
   "formatter": {
     "enabled": true,

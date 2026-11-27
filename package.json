@@ -12,10 +12,13 @@
     "preview": "pnpm --filter @air-robotics/site preview",
     "check": "pnpm --filter @air-robotics/site check && pnpm --filter @air-robotics/docs-theme check",
     "lint": "biome check .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "sync:docs": "node scripts/sync-robot-docs.mjs",
+    "test:aggregation": "node scripts/test-aggregation.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "yaml": "^2.7.0"
   }
 }

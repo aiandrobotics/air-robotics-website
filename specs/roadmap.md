@@ -41,7 +41,7 @@ Each phase below is designed to be specified and implemented incrementally using
   - Responsive, clean visual polish verified on `dev.air-robotics.ai` and promoted to `air-robotics.ai`.
 
 ## Phase 5: Multi-Repo Docs Aggregation & Robot Registry
-- **Status**: `[ ]` Not started
+- **Status**: `[x]` Complete
 - **Goal**: Enable the main website to pull robot documentation from external robot repositories automatically at build time and rebuild on updates.
 - **Key Deliverables**:
   - Robot registry manifest (e.g., `robots.yaml`) defining robot metadata (name, summary, slug, repo, branch/ref, docs path).

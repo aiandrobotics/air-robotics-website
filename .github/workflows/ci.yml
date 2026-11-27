@@ -39,6 +39,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Sync robot documentation
+        env:
+          ROBOTS_READ_TOKEN: ${{ secrets.ROBOTS_READ_TOKEN }}
+        run: pnpm sync:docs
+
       - name: Lint and format check
         run: pnpm lint
 
@@ -47,6 +52,9 @@ jobs:
 
       - name: Build static site
         run: pnpm build
+
+      - name: Test multi-repo docs aggregation
+        run: pnpm test:aggregation
 
       - name: Verify expected static outputs
         run: |

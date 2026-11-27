@@ -9,10 +9,15 @@ This repository uses GitHub Actions with **AWS OIDC** (zero static AWS keys) and
   - Runs `pnpm lint`, `pnpm check`, `pnpm build`, and verifies `site/dist/index.html` and `site/dist/docs/index.html`.
   - Runs `terraform fmt -check -recursive infra/` and `terraform validate` across `bootstrap`, `modules/static-site`, `dev`, and `prod`.
   - Runs `terraform plan` against `dev` or `prod` when `infra/` files change and environment variables are configured.
-- **`deploy-dev.yml`** (push to `dev` or `workflow_dispatch`):
-  - Builds `site/dist/`, runs `terraform apply` for `dev` if `infra/` changed, syncs to the `dev` S3 bucket, and invalidates `dev` CloudFront (`https://dev.air-robotics.ai`).
+- **`deploy-dev.yml`** (push to `dev`, `repository_dispatch` `robot-docs-updated`, or `workflow_dispatch`):
+  - Runs `pnpm sync:docs` (using optional `ROBOTS_READ_TOKEN` secret for private robot repos), builds `site/dist/`, runs `terraform apply` for `dev` if `infra/` changed, syncs to the `dev` S3 bucket, and invalidates `dev` CloudFront (`https://dev.air-robotics.ai`).
 - **`deploy-prod.yml`** (push to `main` or `workflow_dispatch`):
-  - Builds `site/dist/`, runs `terraform apply` for `prod` if `infra/` changed, syncs to the `prod` S3 bucket, and invalidates `prod` CloudFront (`https://air-robotics.ai`).
+  - Runs `pnpm sync:docs`, builds `site/dist/`, runs `terraform apply` for `prod` if `infra/` changed, syncs to the `prod` S3 bucket, and invalidates `prod` CloudFront (`https://air-robotics.ai`).
+
+### Cross-Repo Rebuild Trigger (`repository_dispatch`)
+Robot repositories trigger an automatic `dev.air-robotics.ai` rebuild on doc merge by sending a `repository_dispatch` event to `aiandrobotics/air-robotics-website` with `event_type: "robot-docs-updated"`.
+
+If any robot repositories are private, add a repository secret named `ROBOTS_READ_TOKEN` (fine-grained PAT with `Contents: Read` on the robot repos) in **GitHub → Settings → Secrets and variables → Actions → Secrets**.
 
 ## One-Time Setup Checklist
 

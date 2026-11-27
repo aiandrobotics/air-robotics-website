@@ -7,6 +7,11 @@ site/dist/
 .astro/
 site/.astro/
 
+# Synced multi-repo robot docs & generated files
+site/src/content/docs/docs/*/
+site/public/robots/
+site/src/generated/
+
 # Environment files
 .env
 .env.*

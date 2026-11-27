@@ -12,7 +12,8 @@
   "dependencies": {
     "@air-robotics/docs-theme": "workspace:*",
     "@astrojs/starlight": "^0.43.2",
-    "astro": "^7.4.13"
+    "astro": "^7.4.13",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
