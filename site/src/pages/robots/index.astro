@@ -1,0 +1,72 @@
+---
+import { AIR_BRAND } from '@air-robotics/docs-theme';
+import AirLayout from '@air-robotics/docs-theme/AirLayout.astro';
+import { ROBOTS } from '../../data/robots';
+---
+
+<AirLayout
+  title={`Robots | ${AIR_BRAND.fullName}`}
+  description="Explore Air Robotics open-source robot projects and their unified documentation."
+  currentPath="/robots/"
+>
+  <section class="page-hero">
+    <div class="container hero-inner">
+      <div class="eyebrow">Robot Catalog</div>
+      <h1 class="page-title">Open-Source Robots</h1>
+      <p class="hero-subtitle">
+        Every robot is developed in its own standalone repository with complete documentation,
+        mechanics, electronics, and software.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        {
+          ROBOTS.map((robot) => (
+            <article class="card card-interactive">
+              <div class="robot-details">
+                <span class="status-pill">{robot.status}</span>
+                <h2 class="robot-name">{robot.name}</h2>
+                <p class="card-text">{robot.summary}</p>
+                <ul>
+                  {robot.highlights.map((highlight) => (
+                    <li class="card-text">• {highlight}</li>
+                  ))}
+                </ul>
+                <div class="robot-actions">
+                  <a href={robot.docsHref} class="btn btn-primary">
+                    Read {robot.name} Docs
+                  </a>
+                  <a
+                    href={robot.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline"
+                  >
+                    View on GitHub
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+
+        <article class="card">
+          <div class="robot-details">
+            <span class="status-pill">More Coming</span>
+            <h2 class="robot-name">Next Robots</h2>
+            <p class="card-text">
+              Air Robotics is designed so each new robot project plugs into this catalog and
+              documentation hub automatically when registered.
+            </p>
+            <div class="robot-actions">
+              <a href="/contact/" class="btn btn-outline">Collaborate With Us</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</AirLayout>

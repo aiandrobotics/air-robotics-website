@@ -1,0 +1,60 @@
+---
+import { AIR_BRAND } from '@air-robotics/docs-theme';
+import AirLayout from '@air-robotics/docs-theme/AirLayout.astro';
+---
+
+<AirLayout
+  title={`Contact | ${AIR_BRAND.fullName}`}
+  description="Get in touch with Air Robotics for questions, collaborations, or open-source contributions."
+  currentPath="/contact/"
+>
+  <section class="page-hero">
+    <div class="container hero-inner">
+      <div class="eyebrow">Get in Touch</div>
+      <h1 class="page-title">Contact {AIR_BRAND.fullName}</h1>
+      <p class="hero-subtitle">
+        Have a question about one of our robots, want to collaborate, or found an issue in the
+        documentation? Reach out directly.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <article class="card card-interactive">
+          <div class="robot-details">
+            <span class="status-pill">Direct Email</span>
+            <h2 class="card-title">Email the Team</h2>
+            <p class="card-text">
+              For general inquiries, partnerships, or hardware collaboration, email us directly at
+              <strong>{AIR_BRAND.contactEmail}</strong>.
+            </p>
+            <a href={`mailto:${AIR_BRAND.contactEmail}`} class="btn btn-primary">
+              Email {AIR_BRAND.contactEmail}
+            </a>
+          </div>
+        </article>
+
+        <article class="card card-interactive">
+          <div class="robot-details">
+            <span class="status-pill">Open Source</span>
+            <h2 class="card-title">GitHub &amp; Community</h2>
+            <p class="card-text">
+              Explore our robot repositories, report documentation issues, or contribute pull
+              requests on GitHub.
+            </p>
+            <a
+              href={AIR_BRAND.githubOrgUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              Visit GitHub Organization
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</AirLayout>

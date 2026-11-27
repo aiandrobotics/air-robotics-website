@@ -1,0 +1,50 @@
+---
+import { AIR_BRAND, AIR_NAV_ITEMS, type AirNavItem } from '../index';
+
+export interface Props {
+  navItems?: readonly AirNavItem[];
+}
+
+const { navItems = AIR_NAV_ITEMS } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="brand-mark">{AIR_BRAND.name}</a>
+      <p class="footer-copy">
+        © {currentYear} {AIR_BRAND.fullName}. Building the future of open-source robotics.
+      </p>
+    </div>
+
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} class="nav-link">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={`mailto:${AIR_BRAND.contactEmail}`} class="nav-link">
+            {AIR_BRAND.contactEmail}
+          </a>
+        </li>
+        <li>
+          <a
+            href={AIR_BRAND.githubOrgUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-link"
+          >
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</footer>

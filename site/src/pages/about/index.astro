@@ -1,0 +1,72 @@
+---
+import { AIR_BRAND } from '@air-robotics/docs-theme';
+import AirLayout from '@air-robotics/docs-theme/AirLayout.astro';
+
+const pillars = [
+  {
+    title: 'Open by Default',
+    description:
+      'Mechanical designs, schematics, firmware, and documentation are built to be read, reproduced, and improved by the community.',
+  },
+  {
+    title: 'Independent Projects, Unified Hub',
+    description:
+      'Each robot has its own standalone repository and local docs server, while automatically publishing into air-robotics.ai with one consistent brand experience.',
+  },
+  {
+    title: 'Engineering Clarity',
+    description:
+      'Clean documentation, reproducible infrastructure, and disciplined dev-to-prod delivery keep every project dependable.',
+  },
+] as const;
+---
+
+<AirLayout
+  title={`About | ${AIR_BRAND.fullName}`}
+  description="Learn about Air Robotics, our open-source robotics mission, and how we build and document every robot."
+  currentPath="/about/"
+>
+  <section class="page-hero">
+    <div class="container hero-inner">
+      <div class="eyebrow">Company &amp; Mission</div>
+      <h1 class="page-title">About {AIR_BRAND.fullName}</h1>
+      <p class="hero-subtitle">
+        We build open-source robotics projects with clear, complete documentation so makers,
+        researchers, and engineers can go from idea to working hardware faster.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">How We Build</p>
+        <h2 class="section-title">Our Core Principles</h2>
+      </div>
+
+      <ul class="grid-3">
+        {
+          pillars.map((pillar) => (
+            <li class="card">
+              <h3 class="card-title">{pillar.title}</h3>
+              <p class="card-text">{pillar.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-surface">
+    <div class="container hero-inner">
+      <h2 class="section-title">Ready to explore?</h2>
+      <p class="hero-subtitle">
+        Browse our robot catalog, dive into the documentation hub, or get in touch with the team.
+      </p>
+      <div class="hero-actions">
+        <a href="/robots/" class="btn btn-primary">Explore Robots</a>
+        <a href="/contact/" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</AirLayout>

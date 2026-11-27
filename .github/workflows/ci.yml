@@ -51,6 +51,9 @@ jobs:
       - name: Verify expected static outputs
         run: |
           test -f site/dist/index.html
+          test -f site/dist/robots/index.html
+          test -f site/dist/about/index.html
+          test -f site/dist/contact/index.html
           test -f site/dist/docs/index.html
 
   terraform:

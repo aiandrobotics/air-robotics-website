@@ -1,0 +1,23 @@
+/* Shared Starlight theme overrides for Air Robotics (main site + standalone robot repos) */
+:root {
+  --sl-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  --sl-color-accent-low: #0a2540;
+  --sl-color-accent: #0071e3;
+  --sl-color-accent-high: #7cc4ff;
+  --sl-color-bg: #000000;
+  --sl-color-bg-nav: #0a0a0c;
+  --sl-color-bg-sidebar: #0a0a0c;
+  --sl-color-hairline-light: #27272a;
+  --sl-color-hairline: #27272a;
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #e6f2ff;
+  --sl-color-accent: #0071e3;
+  --sl-color-accent-high: #00448a;
+  --sl-color-bg: #ffffff;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #f5f5f7;
+  --sl-color-hairline-light: #e4e4e7;
+  --sl-color-hairline: #e4e4e7;
+}

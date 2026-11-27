@@ -7,7 +7,12 @@
     ".": {
       "types": "./src/index.ts",
       "default": "./src/index.ts"
-    }
+    },
+    "./tokens.css": "./src/styles/tokens.css",
+    "./starlight.css": "./src/styles/starlight.css",
+    "./AirLayout.astro": "./src/components/AirLayout.astro",
+    "./AirHeader.astro": "./src/components/AirHeader.astro",
+    "./AirFooter.astro": "./src/components/AirFooter.astro"
   },
   "scripts": {
     "check": "tsc --noEmit"
