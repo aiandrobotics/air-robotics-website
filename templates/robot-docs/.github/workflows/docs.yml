@@ -46,10 +46,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dispatch robot-docs-updated event
-        if: secrets.AIR_WEBSITE_DISPATCH_TOKEN != ''
         env:
           DISPATCH_TOKEN: ${{ secrets.AIR_WEBSITE_DISPATCH_TOKEN }}
         run: |
+          if [ -z "${DISPATCH_TOKEN}" ]; then
+            echo "::notice::Skipping dispatch because AIR_WEBSITE_DISPATCH_TOKEN is not configured."
+            exit 0
+          fi
           curl -fsSL -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${DISPATCH_TOKEN}" \
