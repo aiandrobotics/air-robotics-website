@@ -50,7 +50,7 @@ Each phase below is designed to be specified and implemented incrementally using
   - Automated check verifying that adding a robot entry to the manifest integrates its docs without modifying site code.
 
 ## Phase 6: Robot Docs Template & `air-robot-docs` Agent Skill Plugin
-- **Status**: `[ ]` Not started
+- **Status**: `[x]` Complete
 - **Goal**: Deliver the reusable standalone robot-docs template and package all bootstrapping, styling, and CI integration instructions into the `air-robot-docs` agent skill plugin in `https://github.com/sathyavikram/agent-plugins.git`, ready to use for building robot repos.
 - **Key Deliverables**:
   - Reusable robot-docs template using Astro + Starlight and the shared Air Robotics theme, runnable standalone with a single command.

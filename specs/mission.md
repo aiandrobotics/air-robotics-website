@@ -13,6 +13,7 @@ Provide a clean, unified web presence for **Air Robotics** at [air-robotics.ai](
 
 2. **Consistent, Clean Brand Experience**
    - Every page—from the landing page and robot catalog to individual robot docs (whether viewed standalone or inside the main site)—shares one clean, cohesive Air Robotics look and feel via a shared theme package.
+   - All website pages and robot documentation must be fully responsive and work cleanly across all devices and screen sizes (mobile, tablet, and desktop) with zero horizontal overflow.
    - Prioritize visual clarity, fast load times, and uncluttered navigation.
 
 3. **Reproducible Infrastructure as Code**

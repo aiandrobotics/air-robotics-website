@@ -21,3 +21,28 @@
   --sl-color-hairline-light: #e4e4e7;
   --sl-color-hairline: #e4e4e7;
 }
+
+/* Responsive safeguards across mobile, tablet, and desktop */
+.sl-markdown-content {
+  overflow-wrap: anywhere;
+}
+
+.sl-markdown-content img,
+.sl-markdown-content video,
+.sl-markdown-content svg,
+.sl-markdown-content iframe {
+  max-inline-size: 100%;
+  height: auto;
+}
+
+.sl-markdown-content table {
+  display: block;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sl-markdown-content pre {
+  max-inline-size: 100%;
+  overflow-x: auto;
+}

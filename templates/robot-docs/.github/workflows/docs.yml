@@ -1,0 +1,58 @@
+name: Robot Docs
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate & Build Standalone Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: docs/pnpm-lock.yaml
+
+      - name: Install dependencies
+        working-directory: docs
+        run: pnpm install
+
+      - name: Typecheck and build standalone docs
+        working-directory: docs
+        run: pnpm check && pnpm build
+
+  notify-main-website:
+    name: Trigger air-robotics-website Dev Rebuild
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch robot-docs-updated event
+        if: secrets.AIR_WEBSITE_DISPATCH_TOKEN != ''
+        env:
+          DISPATCH_TOKEN: ${{ secrets.AIR_WEBSITE_DISPATCH_TOKEN }}
+        run: |
+          curl -fsSL -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${DISPATCH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/aiandrobotics/air-robotics-website/dispatches \
+            -d "{\"event_type\":\"robot-docs-updated\",\"client_payload\":{\"repo\":\"${GITHUB_REPOSITORY}\",\"sha\":\"${GITHUB_SHA}\"}}"
