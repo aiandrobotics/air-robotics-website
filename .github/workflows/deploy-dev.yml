@@ -32,6 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'repository_dispatch' && 'dev' || '' }}
           fetch-depth: 2
 
       - uses: pnpm/action-setup@v4
